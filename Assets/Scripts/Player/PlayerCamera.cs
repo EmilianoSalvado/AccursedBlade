@@ -35,6 +35,11 @@ public class PlayerCamera : MonoBehaviour
     {
         if (x != 0f || y != 0f)
         {
+            var angle = Vector3.Angle(transform.position, transform.forward);
+            Debug.Log(angle);
+            if ((y < 0f && angle > 179f) || (y > 0f && angle < 120f))
+                y = 0f;
+
             transform.position += (transform.right * -x + transform.up * -y) * (_auxSensivity * Time.deltaTime);
             transform.LookAt(_pivot);
         }

@@ -27,6 +27,7 @@ public class Model : MonoBehaviour
     {
         _controller = new Controller(this, _view);
         _bladeHitBox.SetDamage(_dmgA);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void AddToOnMovement(Action<float> method)

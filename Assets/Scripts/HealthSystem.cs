@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour
+public abstract class HealthSystem : MonoBehaviour
 {
-    [SerializeField] float _maxHP, _currentHP;
+    [SerializeField] protected float _maxHP, _currentHP;
 
     private void Start()
     {
         _currentHP = _maxHP;
     }
 
-    public void GetDamage(float dmg)
+    public virtual void GetDamage(float dmg)
     {
         _currentHP -= dmg;
 
@@ -19,7 +17,7 @@ public class HealthSystem : MonoBehaviour
         { OnDead(); }
     }
 
-    public void OnDead()
+    public virtual void OnDead()
     {
         Debug.Log("DEAD");
     }

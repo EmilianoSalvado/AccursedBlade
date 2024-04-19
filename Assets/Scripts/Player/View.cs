@@ -6,6 +6,7 @@ public class View : MonoBehaviour
     [SerializeField] string _runningParameterTag;
 
     [SerializeField] Animator _bladeAnimator;
+    public Animator BladeAnimator { get { return _bladeAnimator; } }
     [SerializeField] string _attackAParameter;
     [SerializeField] string _attackBParameter;
 

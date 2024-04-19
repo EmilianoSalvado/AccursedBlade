@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -58,13 +54,5 @@ public class PlayerCamera : MonoBehaviour
         _auxSensivity = _defaultSensivity;
 
         return _offset;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(_pivot.position - transform.forward * _offset, _pivot.position - transform.position);
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawLine(transform.position, (transform.position - transform.forward * (_blockedOffset + .2f)));
     }
 }

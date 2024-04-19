@@ -1,9 +1,11 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
+using System.Collections;
 
-[RequireComponent(typeof (Rigidbody))]
-[RequireComponent(typeof (Collider))]
-[RequireComponent(typeof (View))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(View))]
 public class Model : MonoBehaviour
 {
     [SerializeField] Rigidbody _rb;
@@ -15,16 +17,38 @@ public class Model : MonoBehaviour
     [SerializeField] View _view;
     Controller _controller;
 
+    [SerializeField] HitBox _bladeHitBox;
+    [SerializeField] float _dmgA, _dmgB, _dmgC;
+
     event Action<float> OnMovement = delegate { };
+    event Action<bool> OnAttackA = delegate { };
+    event Action<bool> OnAttackB = delegate { };
+    event Action<bool> OnAttackC = delegate { };
 
     private void Start()
     {
         _controller = new Controller(this, _view);
+        _bladeHitBox.SetDamage(_dmgA);
     }
 
     public void AddToOnMovement(Action<float> method)
     {
         OnMovement += method;
+    }
+
+    public void AddToOnAttackA(Action<bool> method)
+    {
+        OnAttackA += method;
+    }
+
+    public void AddToOnAttackB(Action<bool> method)
+    {
+        OnAttackB += method;
+    }
+
+    public void AddToOnAttackC(Action<bool> method)
+    {
+        OnAttackC += method;
     }
 
     private void Update()
@@ -61,5 +85,32 @@ public class Model : MonoBehaviour
     public void CameraAim(float mouseX, float mouseY)
     {
         _playerCamera.CameraMovement(mouseX, mouseY);
+    }
+
+    public void AttackA()
+    {
+        _bladeHitBox.SetDamage(_dmgA);
+        OnAttackA(true);
+        OnAttackB(false);
+    }
+
+    public void AttackB()
+    {
+        _bladeHitBox.SetDamage(_dmgB);
+        OnAttackA(false);
+        OnAttackB(true);
+    }
+
+    public void AttackC()
+    {
+        _bladeHitBox.SetDamage(_dmgC);
+        OnAttackA(true);
+        OnAttackB(true);
+    }
+
+    public void SetAttacksFalse()
+    {
+        OnAttackA(false);
+        OnAttackB(false);
     }
 }

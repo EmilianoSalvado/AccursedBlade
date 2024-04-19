@@ -159,6 +159,10 @@ MonoBehaviour:
   _movementSpeed: 6
   _playerCamera: {fileID: 330585548}
   _view: {fileID: 218856529}
+  _bladeHitBox: {fileID: 634244697}
+  _dmgA: 3
+  _dmgB: 2.5
+  _dmgC: 3.2
 --- !u!114 &218856529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1144261061}
   _runningParameterTag: Speed
+  _bladeAnimator: {fileID: 295547382}
+  _attackAParameter: AttackA
+  _attackBParameter: AttackB
 --- !u!54 &218856530
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1907,7 +1914,8 @@ GameObject:
   - component: {fileID: 634244696}
   - component: {fileID: 634244695}
   - component: {fileID: 634244694}
-  m_Layer: 0
+  - component: {fileID: 634244697}
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1945,9 +1953,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2001,6 +2009,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634244692}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &634244697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634244692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855a73be0e4f11e43a427d1b2d58c3e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dmg: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -4388,7 +4409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1250965221}
   - component: {fileID: 1250965222}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10142,7 +10142,7 @@ MonoBehaviour:
   - {fileID: 1477689163}
   - {fileID: 2101787738}
   _rb: {fileID: 1558804547}
-  _speed: 0.1
+  _speed: 2
 --- !u!850595691 &1611913057
 LightingSettings:
   m_ObjectHideFlags: 0

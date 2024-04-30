@@ -47,7 +47,6 @@ public class PlayerCamera : MonoBehaviour
     {
         if (Physics.Raycast(_pivot.position - transform.forward * _offset, _pivot.position - transform.position, out _hit, _offset, _everythingButPlayerLayer))
         {
-            //_auxSensivity = Mathf.Lerp(_defaultSensivity * .2f, _defaultSensivity, (_pivot.position - transform.position).sqrMagnitude / (_offset * _offset));
             return (_pivot.position - _hit.point).magnitude - _blockedOffset;
         }
 

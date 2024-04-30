@@ -622,7 +622,7 @@ MonoBehaviour:
   _pivot: {fileID: 503293076}
   _offset: 7
   _blockedOffset: 1.5
-  _defaultSensivity: 10
+  _defaultSensivity: 100
   _auxSensivity: 0
   _everythingButPlayerLayer:
     serializedVersion: 2

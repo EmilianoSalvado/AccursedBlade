@@ -8,13 +8,13 @@ public class Platform : MonoBehaviour
     [SerializeField] Rigidbody _rb;
     [SerializeField] float _speed;
     Vector3 _auxVector;
-    Transform _currentPoint;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Model>(out var model))
         {
             model.transform.SetParent(transform);
+            StopAllCoroutines();
             StartCoroutine(Move(model));
         }
     }
@@ -31,21 +31,23 @@ public class Platform : MonoBehaviour
     {
         if (_auxVector.sqrMagnitude <= 0f) return;
 
-        _rb.MovePosition(_auxVector);
+        _rb.MovePosition(transform.position + _auxVector * (_speed * Time.fixedDeltaTime));
     }
     IEnumerator Move(Model model)
     {
+        yield return new WaitForSeconds(.6f);
+
         foreach (var p in _points)
         {
-            _currentPoint = p;
-            _auxVector = transform.position + (_currentPoint.position - transform.position).normalized * (_speed * Time.fixedDeltaTime);
-
-            while (Vector3.Distance(transform.position, p.position) > .1f)
+            while (Vector3.Distance(transform.position, p.position) > .2f)
             {
+                _auxVector = (p.position - transform.position).normalized;
                 yield return null;
             }
 
+            _auxVector = Vector3.zero;
+            _rb.MovePosition(p.position);
         }
-        _points.Reverse().ToArray();
+        _points = _points.Reverse().ToArray();
     }
 }

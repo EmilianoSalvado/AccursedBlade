@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyHealthSystem : HealthSystem
 {
-    [SerializeField] Enemy _enemy;
+    [SerializeField] EnemyModel _enemy;
 
     public override void GetDamage(float dmg)
     {

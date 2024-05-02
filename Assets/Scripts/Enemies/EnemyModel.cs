@@ -10,7 +10,6 @@ public class EnemyModel : MonoBehaviour
     [SerializeField] float _repelForce;
 
     [SerializeField] NavMeshAgent _naveMeshAgent;
-    [SerializeField] Transform _target;
     [SerializeField] float _visionRadius, _visionAngle, _attackCooldown;
     [SerializeField] LayerMask _obstaclesMask;
     WaitForSeconds _attackCD;
@@ -24,9 +23,9 @@ public class EnemyModel : MonoBehaviour
 
         _checkForPlayer = () =>
         {
-            if (Tools.InRadius(transform.position, _target.position, _visionRadius) && 
-            Tools.InSight(transform.position, _target.position, _obstaclesMask) &&
-            Tools.InAngle(transform, _target.position, _visionAngle))
+            if (Tools.InRadius(transform.position, _player.position, _visionRadius) && 
+            Tools.InSight(transform.position, _player.position, _obstaclesMask) &&
+            Tools.InAngle(transform, _player.position, _visionAngle))
             {
                 StopAllCoroutines();
                 StartCoroutine(AttackRoutine());
@@ -40,6 +39,11 @@ public class EnemyModel : MonoBehaviour
         _checkForPlayer();
     }
 
+    public void SetPlayer(Transform playerTransform)
+    {
+        _player = playerTransform;
+    }
+
     public void GetRepeled()
     {
         _rb.AddForce(-transform.forward * _repelForce, ForceMode.Impulse);
@@ -49,7 +53,7 @@ public class EnemyModel : MonoBehaviour
     {
         while (true)
         {
-            _naveMeshAgent.SetDestination(_target.position);
+            _naveMeshAgent.SetDestination(_player.position);
             yield return new WaitForSeconds(.2f);
             _checkForPlayer();
         }

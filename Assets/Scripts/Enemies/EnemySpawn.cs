@@ -8,7 +8,12 @@ public class EnemySpawn : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyManager.Instance.Spawn(_pointsTransform.Select(x => x.position).ToArray(), _enemyTypes);
+        StagesManager.Instance.SpawnerTriggered();
         GetComponent<Collider>().enabled = false;
+    }
+
+    public void AuxTrigger()
+    {
+        EnemyManager.Instance.Spawn(_pointsTransform.Select(x => x.position).ToArray(), _enemyTypes);
     }
 }

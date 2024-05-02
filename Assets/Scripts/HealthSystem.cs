@@ -11,6 +11,8 @@ public abstract class HealthSystem : MonoBehaviour
 
     public virtual void GetDamage(float dmg)
     {
+        if (_currentHP < 0f) return;
+
         _currentHP -= dmg;
 
         if (_currentHP <= 0)

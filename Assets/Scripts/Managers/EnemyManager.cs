@@ -45,7 +45,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (_currentEnemies.Contains(enKilled))
         {
-            _currentEnemies = _currentEnemies.TakeWhile(x => x != enKilled).ToList();
+            _currentEnemies.Remove(enKilled);
         }
     }
 }

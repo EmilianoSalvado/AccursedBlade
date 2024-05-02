@@ -44,11 +44,6 @@ public class EnemyModel : MonoBehaviour
         _player = playerTransform;
     }
 
-    public void GetRepeled()
-    {
-        _rb.AddForce(-transform.forward * _repelForce, ForceMode.Impulse);
-    }
-
     public void OnDead()
     {
         EnemyManager.Instance.GetKill(this);

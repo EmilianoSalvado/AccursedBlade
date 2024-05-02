@@ -16,6 +16,8 @@ public class EnemyModel : MonoBehaviour
     WaitForSeconds _attackCD;
     Action _checkForPlayer;
 
+    [SerializeField] EnemyWeapon _weapon;
+
     private void Start()
     {
         _attackCD = new WaitForSeconds(_attackCooldown);
@@ -43,17 +45,12 @@ public class EnemyModel : MonoBehaviour
         _rb.AddForce(-transform.forward * _repelForce, ForceMode.Impulse);
     }
 
-    public void Attack()
-    {
-        Debug.Log("ATTACK!!");
-    }
-
     IEnumerator SeekRoutine()
     {
         while (true)
         {
             _naveMeshAgent.SetDestination(_target.position);
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.2f);
             _checkForPlayer();
         }
     }
@@ -64,7 +61,7 @@ public class EnemyModel : MonoBehaviour
 
         while (true)
         {
-            Attack();
+            _weapon.Attack();
             yield return _attackCD;
             _checkForPlayer();
         }

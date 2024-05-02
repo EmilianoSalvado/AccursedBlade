@@ -49,6 +49,13 @@ public class EnemyModel : MonoBehaviour
         _rb.AddForce(-transform.forward * _repelForce, ForceMode.Impulse);
     }
 
+    public void OnDead()
+    {
+        EnemyManager.Instance.GetKill(this);
+        StopAllCoroutines();
+        this.enabled = false;
+    }
+
     IEnumerator SeekRoutine()
     {
         while (true)

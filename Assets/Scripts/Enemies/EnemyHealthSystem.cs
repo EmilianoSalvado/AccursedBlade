@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyHealthSystem : HealthSystem
@@ -13,5 +14,6 @@ public class EnemyHealthSystem : HealthSystem
     public override void OnDead()
     {
         GetComponent<MeshRenderer>().material.color = Color.red;
+        _enemy.OnDead();
     }
 }

@@ -9,5 +9,6 @@ public class EnemySpawn : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         EnemyManager.Instance.Spawn(_pointsTransform.Select(x => x.position).ToArray(), _enemyTypes);
+        GetComponent<Collider>().enabled = false;
     }
 }

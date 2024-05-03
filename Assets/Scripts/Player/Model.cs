@@ -18,10 +18,13 @@ public class Model : MonoBehaviour
     [SerializeField] HitBox _bladeHitBox;
     [SerializeField] float _dmgA, _dmgB, _dmgC;
 
+    [SerializeField] Collider _shieldCollider;
+
     event Action<float> OnMovement = delegate { };
     event Action<bool> OnAttackA = delegate { };
     event Action<bool> OnAttackB = delegate { };
     event Action<bool> OnAttackC = delegate { };
+    event Action<bool> OnBlock = delegate { };
 
     private void Start()
     {
@@ -45,9 +48,9 @@ public class Model : MonoBehaviour
         OnAttackB += method;
     }
 
-    public void AddToOnAttackC(Action<bool> method)
+    public void AddToOnBlock(Action<bool> method)
     {
-        OnAttackC += method;
+        OnBlock += method;
     }
 
     private void Update()
@@ -111,5 +114,11 @@ public class Model : MonoBehaviour
     {
         OnAttackA(false);
         OnAttackB(false);
+    }
+
+    public void ShieldOn(bool onOff)
+    {
+        _shieldCollider.enabled = onOff;
+        OnBlock(onOff);
     }
 }

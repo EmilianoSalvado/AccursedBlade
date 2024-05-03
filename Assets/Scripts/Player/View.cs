@@ -6,9 +6,9 @@ public class View : MonoBehaviour
     [SerializeField] string _runningParameterTag;
 
     [SerializeField] Animator _bladeAnimator;
-    public Animator BladeAnimator { get { return _bladeAnimator; } }
     [SerializeField] string _attackAParameter;
     [SerializeField] string _attackBParameter;
+    [SerializeField] MeshRenderer _shieldRenderer;
 
     public void OnMovement(float magnitude)
     {
@@ -23,5 +23,10 @@ public class View : MonoBehaviour
     public void OnAttackB(bool b)
     {
         _bladeAnimator.SetBool(_attackBParameter, b);
+    }
+
+    public void OnBlock(bool b)
+    {
+        _shieldRenderer.enabled = b;
     }
 }

@@ -10,6 +10,7 @@ public class Controller
         m.AddToOnMovement(v.OnMovement);
         m.AddToOnAttackA(v.OnAttackA);
         m.AddToOnAttackB(v.OnAttackB);
+        m.AddToOnBlock(v.OnBlock);
         _model = m;
     }
 
@@ -32,6 +33,10 @@ public class Controller
         { _model.AttackB(); return; }
         if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1))
         { _model.SetAttacksFalse(); }
+        if ( Input.GetKeyDown(KeyCode.LeftControl))
+        { _model.ShieldOn(true); }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        { _model.ShieldOn(false); }
     }
 
     public void OnFixedUpdate()

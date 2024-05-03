@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] List<EnemyModel> _currentEnemies = new List<EnemyModel>();
     [SerializeField] EnemyModel _swordsmanPrefab, _gunnerPrefab;
     [SerializeField] Transform _playerTransform;
+    [SerializeField] EnemiesIndex _index;
     Dictionary<EnemyTypes, EnemyModel> _prefabs = new Dictionary<EnemyTypes, EnemyModel>();
 
     public int EnemyCount { get { return _currentEnemies.Count; } }
@@ -35,7 +36,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var sp in spawnPoints)
         {
-            var en = Instantiate(_prefabs[enType], sp, Quaternion.identity);
+            var en = Instantiate(_index.Index[enType], sp, Quaternion.identity);
             en.SetPlayer(_playerTransform);
             _currentEnemies.Add(en);
         }

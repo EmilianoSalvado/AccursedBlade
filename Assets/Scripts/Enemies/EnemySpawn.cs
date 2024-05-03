@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     [SerializeField] Wave[] _waves;
+    public Wave[] Waves { get { return _waves; } }
     int _count = 0;
 
     private void OnTriggerEnter(Collider other)

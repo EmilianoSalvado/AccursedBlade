@@ -5,10 +5,9 @@ using UnityEngine;
 public class StagesManager : MonoBehaviour
 {
     [SerializeField] int[] _wavesPerStage;
-    int _stages { get { return _wavesPerStage.Length; } }
     [SerializeField] EnemySpawn[] _spawners;
-    [SerializeField] PlatformAvailability[] _platforms;
-    int _waveCount = 0, _stageCount = 0;
+    [SerializeField] Platform[] _platforms;
+    int  _stageCount = 0;
     [SerializeField] float _waveDelay;
     [SerializeField] bool _spawnTriggered;
     public static StagesManager Instance { get; private set; }
@@ -22,51 +21,31 @@ public class StagesManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Start()
-    {
-        StartCoroutine(StageRoutine());
-    }
-
     IEnumerator StageRoutine()
     {
-        while (!_spawnTriggered)
+        if (_stageCount > 0)
+        { _platforms[_stageCount - 1].PlatformOn(false); }
+
+        for (int j = 0; j < _spawners[_stageCount].Waves.Length; j++)
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(_waveDelay);
+
+            _spawners[_stageCount].AuxTrigger();
+
+            while (EnemyManager.Instance.EnemyCount > 0)
+            { yield return new WaitForSeconds(.5f); }
         }
 
-        for (int i = _stageCount; i < _wavesPerStage.Length; i++)
+        if (_stageCount <= _platforms.Length - 1)
         {
-            _stageCount = i;
-            _spawnTriggered = false;
-
-            if (_stageCount > 0)
-            { _platforms[_stageCount - 1].PlatformOff(); }
-
-            for (int j = _waveCount; j < _wavesPerStage[_waveCount]; j++)
-            {
-                _waveCount = j;
-                yield return new WaitForSeconds(_waveDelay);
-
-                _spawners[i].AuxTrigger();
-
-                while (EnemyManager.Instance.EnemyCount > 0)
-                { yield return new WaitForSeconds(.5f); }
-            }
-
-            if (_stageCount <= _platforms.Length - 1)
-            {
-                _platforms[_stageCount].PlatformOn();
-            }
-
-            while (!_spawnTriggered)
-            {
-                yield return new WaitForSeconds(.5f);
-            }
+            _platforms[_stageCount].PlatformOn(true);
         }
+
+        _stageCount++;
     }
 
     public void SpawnerTriggered()
     {
-        _spawnTriggered = true;
+        StartCoroutine(StageRoutine());
     }
 }

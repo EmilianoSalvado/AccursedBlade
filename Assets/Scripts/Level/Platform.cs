@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -8,9 +9,12 @@ public class Platform : MonoBehaviour
     [SerializeField] Rigidbody _rb;
     [SerializeField] float _speed;
     Vector3 _auxVector;
+    bool _platformOn = false;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!_platformOn) return;
+
         if (other.TryGetComponent<Model>(out var model))
         {
             model.transform.SetParent(transform);
@@ -21,6 +25,8 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!_platformOn) return;
+
         if (other.TryGetComponent<Model>(out var model))
         {
             model.transform.SetParent(null);
@@ -33,6 +39,12 @@ public class Platform : MonoBehaviour
 
         _rb.MovePosition(transform.position + _auxVector * (_speed * Time.fixedDeltaTime));
     }
+
+    public void PlatformOn(bool onOff)
+    {
+        _platformOn = onOff;
+    }
+
     IEnumerator Move(Model model)
     {
         yield return new WaitForSeconds(.6f);

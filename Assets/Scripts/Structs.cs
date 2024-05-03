@@ -2,9 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public struct SpawnSequence
+public struct Wave
 {
-    [SerializeField] EnemyTypes[] _enemyTypes;
-    Dictionary<EnemyTypes, EnemyModel> _enemies;
-    public EnemyModel EnemyModel(EnemyTypes type) {  return _enemies[type]; }
+    [SerializeField] EnemyTypes[] _sequence;
+    public EnemyTypes[] Sequence { get { return _sequence; } }
+    [SerializeField] Transform[] _spawnPoints;
+    public Transform[] SpawnPoints { get { return _spawnPoints; } }
 }

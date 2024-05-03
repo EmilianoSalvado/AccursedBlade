@@ -32,14 +32,11 @@ public class EnemyManager : MonoBehaviour
         _prefabs.Add(EnemyTypes.Gunner, _gunnerPrefab);
     }
 
-    public void Spawn(Vector3[] spawnPoints, EnemyTypes enType)
+    public void Spawn(Vector3 spawnPoint, EnemyTypes enType)
     {
-        foreach (var sp in spawnPoints)
-        {
-            var en = Instantiate(_index.Index[enType], sp, Quaternion.identity);
-            en.SetPlayer(_playerTransform);
-            _currentEnemies.Add(en);
-        }
+        var en = Instantiate(_index.Index[enType], spawnPoint, Quaternion.identity);
+        en.SetPlayer(_playerTransform);
+        _currentEnemies.Add(en);
     }
 
     public void GetKill(EnemyModel enKilled)

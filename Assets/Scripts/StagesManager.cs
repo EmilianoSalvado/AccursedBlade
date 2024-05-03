@@ -47,8 +47,7 @@ public class StagesManager : MonoBehaviour
                 _waveCount = j;
                 yield return new WaitForSeconds(_waveDelay);
 
-                foreach (var spawner in _spawners[i].GetComponents<EnemySpawn>())
-                { spawner.AuxTrigger(); }
+                _spawners[i].AuxTrigger();
 
                 while (EnemyManager.Instance.EnemyCount > 0)
                 { yield return new WaitForSeconds(.5f); }

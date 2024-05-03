@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField] Transform[] _pointsTransform;
-    [SerializeField] EnemyTypes _enemyTypes;
+    [SerializeField] Wave[] _waves;
+    int _count = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +14,12 @@ public class EnemySpawn : MonoBehaviour
 
     public void AuxTrigger()
     {
-        EnemyManager.Instance.Spawn(_pointsTransform.Select(x => x.position).ToArray(), _enemyTypes);
+        int c = 0;
+        foreach (var enType in _waves[_count].Sequence)
+        {
+            EnemyManager.Instance.Spawn(_waves[_count].SpawnPoints[c].position, enType);
+            c++;
+        }
+        _count++;
     }
 }

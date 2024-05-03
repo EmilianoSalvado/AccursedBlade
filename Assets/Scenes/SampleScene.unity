@@ -194,15 +194,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 42027705}
-  - component: {fileID: 42027704}
   - component: {fileID: 42027703}
-  - component: {fileID: 42027706}
+  - component: {fileID: 42027704}
   m_Layer: 24
   m_Name: Spawner (1)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &42027703
 BoxCollider:
@@ -237,9 +236,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fee44482559fac4397d4ecfb43c888f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointsTransform:
-  - {fileID: 835901330}
-  _enemyTypes: 1
+  _waves:
+  - _sequence: 0000000000000000
+    _spawnPoints:
+    - {fileID: 835901330}
+    - {fileID: 30551923}
+  - _sequence: 0000000000000000
+    _spawnPoints:
+    - {fileID: 835901330}
+    - {fileID: 30551923}
 --- !u!4 &42027705
 Transform:
   m_ObjectHideFlags: 0
@@ -255,21 +260,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &42027706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42027702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fee44482559fac4397d4ecfb43c888f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pointsTransform:
-  - {fileID: 30551923}
-  _enemyTypes: 0
 --- !u!43 &168395026
 Mesh:
   m_ObjectHideFlags: 0
@@ -551,7 +541,7 @@ Transform:
   m_GameObject: {fileID: 218856527}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 0.227, z: 0.01}
+  m_LocalPosition: {x: 0.04, y: 0.227, z: -5.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7004,7 +6994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wavesPerStage: 0200000002000000
   _spawners:
-  - {fileID: 1854920180}
+  - {fileID: 1854920182}
   - {fileID: 42027704}
   _platforms:
   - {fileID: 1558804555}
@@ -11919,7 +11909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815651723}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.0626998, y: -4.4348564, z: 5.621475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11954,9 +11944,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1854920181}
-  - component: {fileID: 1854920180}
-  - component: {fileID: 1854920179}
   - component: {fileID: 1854920182}
+  - component: {fileID: 1854920179}
   m_Layer: 24
   m_Name: Spawner
   m_TagString: Untagged
@@ -11985,22 +11974,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1854920180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854920178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fee44482559fac4397d4ecfb43c888f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pointsTransform:
-  - {fileID: 1773761152}
-  - {fileID: 1130974138}
-  _enemyTypes: 0
 --- !u!4 &1854920181
 Transform:
   m_ObjectHideFlags: 0
@@ -12010,7 +11983,7 @@ Transform:
   m_GameObject: {fileID: 1854920178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.95}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 2.8440635, y: 2.8440635, z: 2.8440635}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12028,10 +12001,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fee44482559fac4397d4ecfb43c888f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointsTransform:
-  - {fileID: 22680832}
-  - {fileID: 669229471}
-  _enemyTypes: 1
+  _waves:
+  - _sequence: 00000000000000000000000000000000
+    _spawnPoints:
+    - {fileID: 1773761152}
+    - {fileID: 1130974138}
+    - {fileID: 22680832}
+    - {fileID: 669229471}
+  - _sequence: 01000000010000000100000001000000
+    _spawnPoints:
+    - {fileID: 1773761152}
+    - {fileID: 1130974138}
+    - {fileID: 22680832}
+    - {fileID: 669229471}
 --- !u!1 &1866068134
 GameObject:
   m_ObjectHideFlags: 0
@@ -13129,8 +13111,8 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 503293076}
   - {fileID: 218856532}
-  - {fileID: 1815651724}
   - {fileID: 605597326}
+  - {fileID: 1815651724}
   - {fileID: 1558804553}
   - {fileID: 1079427987}
   - {fileID: 409794391}

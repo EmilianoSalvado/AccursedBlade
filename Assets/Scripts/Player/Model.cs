@@ -23,7 +23,6 @@ public class Model : MonoBehaviour
     event Action<float> OnMovement = delegate { };
     event Action<bool> OnAttackA = delegate { };
     event Action<bool> OnAttackB = delegate { };
-    event Action<bool> OnAttackC = delegate { };
     event Action<bool> OnBlock = delegate { };
 
     private void Start()

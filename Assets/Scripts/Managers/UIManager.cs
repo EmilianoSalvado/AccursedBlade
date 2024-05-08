@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour, IObserver
     {
         yield return new WaitForSeconds(_subBarDelay);
 
-        while (barA.fillAmount > barB.fillAmount)
+        while (barA.fillAmount < barB.fillAmount)
         {
             barB.fillAmount -= (barB.fillAmount - barA.fillAmount) * (_subBarSpeed * Time.deltaTime);
 

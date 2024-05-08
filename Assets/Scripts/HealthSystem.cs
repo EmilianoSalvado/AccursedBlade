@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class HealthSystem : MonoBehaviour, IObservable, IDamageTaker
+public abstract class HealthSystem : MonoBehaviour, IObservable
 {
     [SerializeField] protected float _maxHP, _currentHP;
     [SerializeField] protected GameObject[] _observerGameObjects;

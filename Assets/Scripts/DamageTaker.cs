@@ -1,25 +1,23 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBox : MonoBehaviour
+public class DamageTaker : MonoBehaviour, IDamageTaker
 {
-    [SerializeField] float _dmg;
+    [SerializeField] HealthSystem _healthSystem;
 
-    public void SetDamage(float dgm)
+    public void GetDamage(float dmg)
     {
-        _dmg = dgm;
+        _healthSystem.GetDamage(dmg);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IDamageTaker>(out var damageTaker))
+        if (other.GetComponent<DamageDoer>())
         {
-            damageTaker.GetDamage(_dmg);
-            StopAllCoroutines();
             StartCoroutine(ResetHitBox());
         }
     }
-
     IEnumerator ResetHitBox()
     {
         var c = GetComponent<Collider>();

@@ -21,7 +21,7 @@ TagManager:
   - Player
   - 
   - 
-  - PlayerAttack
+  - 
   - 
   - 
   - 
@@ -29,13 +29,13 @@ TagManager:
   - 
   - 
   - 
-  - EnemyAttack
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - PlayerDamageDoer
+  - PlayerDamageTaker
+  - EnemyDamageDoer
+  - EnemyDamageTaker
   - 
   m_SortingLayers:
   - name: Default

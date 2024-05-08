@@ -17,7 +17,11 @@ public class Shield : MonoBehaviour, IDamageTaker
 
     public void ShieldOn(bool onOff)
     {
-        if (!_energySystem.Available) return;
+        if (onOff && !_energySystem.Available)
+        {
+            ShieldOn(false);
+            return;
+        }
 
         _collider.enabled = onOff;
         _meshRenderer.enabled = onOff;

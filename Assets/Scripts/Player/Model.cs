@@ -15,7 +15,7 @@ public class Model : MonoBehaviour
     [SerializeField] View _view;
     Controller _controller;
 
-    [SerializeField] HitBox _bladeHitBox;
+    [SerializeField] DamageDoer _bladeHitBox;
     [SerializeField] float _dmgA, _dmgB, _dmgC;
     [SerializeField] StaminaSystem _staminaSystem;
     [SerializeField] Shield _shield;

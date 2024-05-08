@@ -17,9 +17,9 @@ public class Bullet : MonoBehaviour
         _rb.MovePosition(transform.position + transform.forward * (_speed * Time.fixedDeltaTime));
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        Destroy(gameObject, .2f);
+        Destroy(gameObject);
     }
 
     IEnumerator SelfDestruction()

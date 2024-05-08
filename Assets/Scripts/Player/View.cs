@@ -27,6 +27,6 @@ public class View : MonoBehaviour
 
     public void OnBlock(bool b)
     {
-        _shieldRenderer.enabled = b;
+        //_shieldRenderer.enabled = b;
     }
 }

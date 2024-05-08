@@ -17,6 +17,9 @@ public class Model : MonoBehaviour
 
     [SerializeField] HitBox _bladeHitBox;
     [SerializeField] float _dmgA, _dmgB, _dmgC;
+    [SerializeField] StaminaSystem _staminaSystem;
+    [SerializeField] Shield _shield;
+    [SerializeField] EnergySystem _energySystem;
 
     [SerializeField] Collider _shieldCollider;
 
@@ -90,6 +93,7 @@ public class Model : MonoBehaviour
 
     public void AttackA()
     {
+        if (!_staminaSystem.Available) return;
         _bladeHitBox.SetDamage(_dmgA);
         OnAttackA(true);
         OnAttackB(false);
@@ -97,6 +101,7 @@ public class Model : MonoBehaviour
 
     public void AttackB()
     {
+        if (!_staminaSystem.Available) return;
         _bladeHitBox.SetDamage(_dmgB);
         OnAttackA(false);
         OnAttackB(true);
@@ -104,6 +109,7 @@ public class Model : MonoBehaviour
 
     public void AttackC()
     {
+        if (!_staminaSystem.Available) return;
         _bladeHitBox.SetDamage(_dmgC);
         OnAttackA(true);
         OnAttackB(true);
@@ -117,7 +123,7 @@ public class Model : MonoBehaviour
 
     public void ShieldOn(bool onOff)
     {
-        _shieldCollider.enabled = onOff;
-        OnBlock(onOff);
+        _shield.ShieldOn(onOff);
+        //OnBlock(onOff);
     }
 }

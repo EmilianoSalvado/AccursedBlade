@@ -1,6 +1,6 @@
 public interface IObservable
 {
     void Subscribe(IObserver obs);
-    void NotifyToSubscribers(string action);
+    void NotifyToSubscribers();
     void Unsubscribe(IObserver obs);
 }

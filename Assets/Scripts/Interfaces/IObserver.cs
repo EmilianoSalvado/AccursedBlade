@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IObserver 
+public interface IObserver
 {
-    public void Notify(string action);
+    public void Notify(params object[] parameters);
 }

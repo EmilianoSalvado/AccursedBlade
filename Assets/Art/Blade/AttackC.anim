@@ -605,6 +605,41 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.083333336
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.26666668
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.45
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.81666666
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0666667
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
   - time: 1.4333333
     functionName: StopParticleSystem
     data: 
@@ -617,6 +652,41 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.7833333
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.0166667
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.2333333
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.4
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.5666666
+    functionName: TakeStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
     intParameter: 0
     messageOptions: 0
   - time: 2.8333333

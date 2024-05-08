@@ -1,26 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IObserver
 {
     [SerializeField] Image _lifeBar, _lifeSubBar, _staminaBar, _staminaSubBar, _energyBar, _energySubBar;
+    [SerializeField] TextMeshProUGUI _batteriesAmountTMP;
     [SerializeField] float _subBarDelay, _subBarSpeed;
 
-    public Dictionary<UIBars, Image[]> _bars = new Dictionary<UIBars, Image[]>();
+    Dictionary<UIBars, Image[]> _bars = new Dictionary<UIBars, Image[]>();
+    Action<int> _setBatteriesAmount;
 
-    private void Start()
+    private void Awake()
     {
         _bars.Clear();
         _bars.Add(UIBars.LifeBar, new Image[] { _lifeBar, _lifeSubBar });
         _bars.Add(UIBars.StaminaBar, new Image[] { _staminaBar, _staminaSubBar });
         _bars.Add(UIBars.EnergyBar, new Image[] { _energyBar, _energySubBar });
+
+        _setBatteriesAmount = x => _batteriesAmountTMP.text = x.ToString();
     }
 
     public void UpdateBar(UIBars bar, float fill)
     {
+        fill = Mathf.Clamp(fill, 0f, fill);
+
         _bars[bar][0].fillAmount = fill;
 
         if (_bars[bar][1].fillAmount < fill)
@@ -49,5 +57,15 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
+    }
+
+    public void Notify(params object[] parameters)
+    {
+        UpdateBar((UIBars)parameters[0], (float)parameters[1]);
+
+        if (parameters.Length > 2)
+        {
+            _setBatteriesAmount((int)parameters[2]);
+        }
     }
 }

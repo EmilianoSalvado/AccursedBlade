@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HitBox : MonoBehaviour
@@ -11,9 +12,19 @@ public class HitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<HealthSystem>(out var healthSystem))
+        if (other.TryGetComponent<IDamageTaker>(out var damageTaker))
         {
-            healthSystem.GetDamage(_dmg);
+            damageTaker.GetDamage(_dmg);
+            StopAllCoroutines();
+            StartCoroutine(ResetHitBox());
         }
+    }
+
+    IEnumerator ResetHitBox()
+    {
+        var c = GetComponent<Collider>();
+        c.enabled = false;
+        yield return new WaitForSeconds(1f);
+        c.enabled = true;
     }
 }

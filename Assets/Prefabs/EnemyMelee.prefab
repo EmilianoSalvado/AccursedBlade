@@ -519,6 +519,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5951698529717558060}
   _animParameter: Attack
+  _collider: {fileID: 555876141604763769}
+  _colliderTime: 1
 --- !u!114 &8933758292028816787
 MonoBehaviour:
   m_ObjectHideFlags: 0

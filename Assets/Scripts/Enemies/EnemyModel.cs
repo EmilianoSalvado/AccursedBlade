@@ -29,6 +29,7 @@ public class EnemyModel : MonoBehaviour
             {
                 StopAllCoroutines();
                 StartCoroutine(AttackRoutine());
+                transform.LookAt(new Vector3(_player.position.x, transform.position.y, _player.position.z));
                 return;
             }
 
@@ -48,7 +49,9 @@ public class EnemyModel : MonoBehaviour
     {
         EnemyManager.Instance.GetKill(this);
         StopAllCoroutines();
+        GetComponent<Collider>().enabled = false;
         this.enabled = false;
+        Destroy(gameObject, 1f);
     }
 
     IEnumerator SeekRoutine()

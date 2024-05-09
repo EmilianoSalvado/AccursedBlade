@@ -8,6 +8,6 @@ public class Gun : EnemyWeapon
     [SerializeField] Transform _bulletPoint;
     public override void Attack()
     {
-        Instantiate(_bulletPrefab, _bulletPoint.position, transform.rotation);
+        Instantiate(_bulletPrefab, _bulletPoint.position, _bulletPoint.rotation);
     }
 }

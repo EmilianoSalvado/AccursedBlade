@@ -35,6 +35,7 @@ public class EnemyManager : MonoBehaviour
     public void Spawn(Vector3 spawnPoint, EnemyTypes enType)
     {
         var en = Instantiate(_index.Index[enType], spawnPoint, Quaternion.identity);
+        en.transform.parent = Config.Instance.MainGameRoot;
         en.SetPlayer(_playerTransform);
         _currentEnemies.Add(en);
     }

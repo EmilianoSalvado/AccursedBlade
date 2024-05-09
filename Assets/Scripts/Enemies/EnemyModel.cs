@@ -23,7 +23,7 @@ public class EnemyModel : MonoBehaviour
 
         _checkForPlayer = () =>
         {
-            if (Tools.InRadius(transform.position, _player.position, _visionRadius) && 
+            if (Tools.InRadius(transform.position, _player.position, _visionRadius) &&
             Tools.InSight(transform.position, _player.position, _obstaclesMask) &&
             Tools.InAngle(transform, _player.position, _visionAngle))
             {
@@ -55,7 +55,9 @@ public class EnemyModel : MonoBehaviour
     {
         while (true)
         {
-            _naveMeshAgent.SetDestination(_player.position);
+            yield return new WaitUntil(() => enabled);
+            if (enabled)
+                _naveMeshAgent.SetDestination(_player.position);
             yield return new WaitForSeconds(.2f);
             _checkForPlayer();
         }
@@ -63,10 +65,13 @@ public class EnemyModel : MonoBehaviour
 
     IEnumerator AttackRoutine()
     {
-        _naveMeshAgent.SetDestination(transform.position);
+        yield return new WaitUntil(() => enabled);
+        if (enabled)
+            _naveMeshAgent.SetDestination(transform.position);
 
         while (true)
         {
+            yield return new WaitUntil(() => enabled);
             _weapon.Attack();
             yield return _attackCD;
             _checkForPlayer();

@@ -25,6 +25,7 @@ public class DamageDoer : MonoBehaviour
         var c = GetComponent<Collider>();
         c.enabled = false;
         yield return new WaitForSeconds(1f);
+        if (!enabled) yield return new WaitUntil(() => enabled);
         c.enabled = true;
     }
 }

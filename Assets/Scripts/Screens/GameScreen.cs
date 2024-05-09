@@ -23,10 +23,10 @@ public class GameScreen : IScreen
 
     public void Deactivate()
     {
-        foreach (var beh in _before)
+        foreach (var beh in _root.GetComponentsInChildren<Behaviour>())
         {
-            _before[beh.Key] = beh.Key.enabled;
-            beh.Key.enabled = false;
+            _before[beh] = beh.enabled;
+            beh.enabled = false;
         }
     }
 

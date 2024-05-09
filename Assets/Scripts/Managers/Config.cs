@@ -1,12 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Device;
 
 public class Config : MonoBehaviour
 {
     [SerializeField] Transform _mainGameRoot;
+    public Transform MainGameRoot {  get { return _mainGameRoot; } }
     bool _paused;
+
+    public static Config Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        { Destroy(this); return; }
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -20,8 +27,7 @@ public class Config : MonoBehaviour
             _paused = !_paused;
             if (_paused)
             {
-                var screenGO = Instantiate(Resources.Load<GameObject>("Assets/Screens/PauseCanvas")).GetComponent<PauseScreen>();
-                ScreenManager.Instance.Push(screenGO);
+                ScreenManager.Instance.Push(Instantiate(Resources.Load<PauseScreen>("Screens/PauseCanvas")));
             }
             else
             { ScreenManager.Instance.Pop(); }

@@ -23,6 +23,7 @@ public class DamageTaker : MonoBehaviour, IDamageTaker
         var c = GetComponent<Collider>();
         c.enabled = false;
         yield return new WaitForSeconds(1f);
+        if (!enabled) yield return new WaitUntil(() => enabled);
         c.enabled = true;
     }
 }

@@ -13,13 +13,13 @@ public class PlayerCamera : MonoBehaviour
     public Vector3 CameraRelativeForward
     {
         get
-        { return _pivot.forward; }
+        { return new Vector3(_pivot.forward.x, _pivot.position.y, _pivot.forward.z).normalized; }
     }
 
     public Vector3 CameraRelativeRight
     {
         get
-        { return _pivot.right; }
+        { return new Vector3(_pivot.right.x, _pivot.position.y, _pivot.right.z).normalized; }
     }
 
     public void UpdatePivot()
@@ -45,7 +45,7 @@ public class PlayerCamera : MonoBehaviour
 
     float CameraDistance()
     {
-        if (Physics.Raycast(_pivot.position - transform.forward * _offset, _pivot.position - transform.position, out _hit, _offset, _everythingButPlayerLayer))
+        if (Physics.SphereCast(_pivot.position - transform.forward * _offset, .3f, _pivot.position - transform.position, out _hit, _offset, _everythingButPlayerLayer))
         {
             return (_pivot.position - _hit.point).magnitude - _blockedOffset;
         }

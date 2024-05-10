@@ -9,6 +9,7 @@ public class Model : MonoBehaviour
     [SerializeField] PlayerMovement _playerMovement;
 
     [SerializeField] PlayerCamera _playerCamera;
+    [SerializeField] PlayerCombat _playerCombat;
 
     [SerializeField] View _view;
     Controller _controller;
@@ -71,6 +72,7 @@ public class Model : MonoBehaviour
 
     public void Movement(float hAxis, float vAxis)
     {
+        _playerMovement.Movement(hAxis, vAxis, _playerCamera);
         OnMovement(_playerMovement.Direction.sqrMagnitude);
     }
 
@@ -79,28 +81,11 @@ public class Model : MonoBehaviour
         _playerCamera.CameraMovement(mouseX, mouseY);
     }
 
-    public void AttackA()
+    public void Attack()
     {
         if (!_staminaSystem.Available) return;
         _bladeHitBox.SetDamage(_dmgA);
-        OnAttackA(true);
-        OnAttackB(false);
-    }
-
-    public void AttackB()
-    {
-        if (!_staminaSystem.Available) return;
-        _bladeHitBox.SetDamage(_dmgB);
-        OnAttackA(false);
-        OnAttackB(true);
-    }
-
-    public void AttackC()
-    {
-        if (!_staminaSystem.Available) return;
-        _bladeHitBox.SetDamage(_dmgC);
-        OnAttackA(true);
-        OnAttackB(true);
+        _playerCombat.Attack();
     }
 
     public void SetAttacksFalse()

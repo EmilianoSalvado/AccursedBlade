@@ -21,18 +21,18 @@ public class Controller
         _mouseHorizontal = Input.GetAxis("Mouse X");
         _mouseVertical = Input.GetAxis("Mouse Y");
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            if (Input.GetKey(KeyCode.Mouse0) && Input.GetKey(KeyCode.Mouse1))
-            { _model.AttackC(); return; }
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+        //{
+        //    if (Input.GetKey(KeyCode.Mouse0) && Input.GetKey(KeyCode.Mouse1))
+        //    { _model.AttackC(); return; }
+        //}
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
-        { _model.AttackA(); return; }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        { _model.AttackB(); return; }
-        if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1))
-        { _model.SetAttacksFalse(); }
+        { _model.Attack(); return; }
+        //if (Input.GetKeyDown(KeyCode.Mouse1))
+        //{ _model.AttackB(); return; }
+        //if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1))
+        //{ _model.SetAttacksFalse(); }
         if ( Input.GetKeyDown(KeyCode.LeftControl))
         { _model.ShieldOn(true); }
         if (Input.GetKeyUp(KeyCode.LeftControl))

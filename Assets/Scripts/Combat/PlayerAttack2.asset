@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _overrideController: {fileID: 22100000, guid: ac2a1113d8dd0284ea7d4e7c91cfc583,
     type: 2}
+  _timeToGetNextHit: 0.2

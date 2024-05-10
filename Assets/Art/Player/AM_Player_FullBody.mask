@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AM_Player_FullBody
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/Root
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.L/Leg.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.L/Leg.L/Foreleg.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.L/Leg.L/Foreleg.L/Foot.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.L/Leg.L/Foreleg.L/Foot.L/Foot.L_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.R/Leg.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.R/Leg.R/Foreleg.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.R/Leg.R/Foreleg.R/Foot.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Pelvis.R/Leg.R/Foreleg.R/Foot.R/Foot.R_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head/PonytailRoot
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head/PonytailRoot/Ponytail0
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head/PonytailRoot/Ponytail0/Ponytail1
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head/PonytailRoot/Ponytail0/Ponytail1/Ponytail2
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head/PonytailRoot/Ponytail0/Ponytail1/Ponytail2/Ponytail3
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Neck/Head/PonytailRoot/Ponytail0/Ponytail1/Ponytail2/Ponytail3/Ponytail3_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.L/Arm.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.L/Arm.L/Forearm.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.L/Arm.L/Forearm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.L/Arm.L/Forearm.L/Hand.L/Fingers.L
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.L/Arm.L/Forearm.L/Hand.L/Fingers.L/Fingers.L_end
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.R/Arm.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.R/Arm.R/Forearm.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.R/Arm.R/Forearm.R/Hand.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.R/Arm.R/Forearm.R/Hand.R/Fingers.R
+    m_Weight: 1
+  - m_Path: Armature/Root/Spine0/Spine1/Shoulder.R/Arm.R/Forearm.R/Hand.R/Fingers.R/Fingers.R_end
+    m_Weight: 1
+  - m_Path: PlayerBody
+    m_Weight: 1

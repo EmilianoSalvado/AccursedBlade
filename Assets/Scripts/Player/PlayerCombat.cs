@@ -5,38 +5,31 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator _animator;
-    [SerializeField] List<SOAttack> _combo;
-    [SerializeField] float _minTimeBetweenCombos;
-    int _comboCount = 0;
+    [SerializeField] float _minTimeBetweenCombos, _minTimeBetweenTriggered;
     float _lastTimeTriggered, _lastComboEnd;
 
     public void Attack()
     {
-        if (Time.time - _lastComboEnd < .5f)
+        if (Time.time - _lastComboEnd < _minTimeBetweenCombos)
         { return; }
 
-        CancelInvoke("EndCombo");
+        StopAllCoroutines();
 
-        if (Time.time - _lastTimeTriggered < _combo[_comboCount].TimeToGetNextHit)
+        if (Time.time - _lastTimeTriggered > _minTimeBetweenTriggered)
         {
-            _animator.runtimeAnimatorController = _combo[_comboCount].OverrideController;
-            _animator.Play("AN_Player_Attack", 2, 0);
+            StartCoroutine(WaitUntilAnimationHasPassed(.8f));
             _lastTimeTriggered = Time.time;
-            _comboCount = _combo.Count + 1 >= _combo.Count ? 0 : _comboCount + 1;
+            _animator.SetBool("Attack", true);
+            return;
         }
+
+        _lastTimeTriggered = Time.time;
+        _animator.SetBool("Attack", false);
     }
 
-    public void ExitAttack()
+    IEnumerator WaitUntilAnimationHasPassed(float minNormilizedTime)
     {
-        if (_animator.GetCurrentAnimatorStateInfo(2).normalizedTime > .9f)
-        {
-            Invoke("EndCombo", .5f);
-        }
-    }
-
-    public void EndCombo()
-    {
-        _comboCount = 0;
-        _lastComboEnd = Time.time;
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(2).normalizedTime > minNormilizedTime);
+        _animator.SetBool("Attack", false);
     }
 }

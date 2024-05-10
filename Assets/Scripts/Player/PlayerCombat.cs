@@ -7,6 +7,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] float _minTimeBetweenCombos, _minTimeBetweenTriggered;
     float _lastTimeTriggered, _lastComboEnd;
+    bool _sheathed = true;
+    public bool Sheathed { get { return _sheathed; } }
 
     public void Attack()
     {
@@ -25,6 +27,12 @@ public class PlayerCombat : MonoBehaviour
 
         _lastTimeTriggered = Time.time;
         _animator.SetBool("Attack", false);
+    }
+
+    public void Sheath()
+    {
+        _sheathed = !_sheathed;
+        _animator.SetBool("Sheathed", _sheathed);
     }
 
     IEnumerator WaitUntilAnimationHasPassed(float minNormilizedTime)

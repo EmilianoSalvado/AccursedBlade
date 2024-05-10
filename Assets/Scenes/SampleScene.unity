@@ -832,6 +832,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 218856537}
   _playerCamera: {fileID: 330585548}
   _playerCombat: {fileID: 218856536}
+  _curse: {fileID: 1784141500}
   _view: {fileID: 218856529}
   _bladeHitBox: {fileID: 1815164609}
   _dmgA: 3
@@ -924,6 +925,7 @@ Transform:
   m_Children:
   - {fileID: 71868076}
   - {fileID: 1866068135}
+  - {fileID: 1784141499}
   m_Father: {fileID: 123755092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &218856533
@@ -992,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 71868075}
-  _minTimeBetweenCombos: 0.5
+  _minTimeBetweenCombos: 0.6
   _minTimeBetweenTriggered: 0.2
 --- !u!114 &218856537
 MonoBehaviour:
@@ -15798,6 +15800,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 123755092}
   m_LocalEulerAnglesHint: {x: 0, y: -37.963, z: 0}
+--- !u!1 &1784141498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784141499}
+  - component: {fileID: 1784141500}
+  m_Layer: 13
+  m_Name: Curse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784141499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784141498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 218856532}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784141500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784141498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3afde797bddb04d43878cd779e4a0b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthSystem: {fileID: 218856533}
+  _damage: 2
+  _timeBetweenTake: 1
 --- !u!1 &1815164606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fc2786d38ba36624b8ddadd96b316727,
@@ -15817,6 +15866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dmg: 5
+  _observerGameObjects:
+  - {fileID: 1784141498}
 --- !u!136 &1815164610
 CapsuleCollider:
   m_ObjectHideFlags: 0

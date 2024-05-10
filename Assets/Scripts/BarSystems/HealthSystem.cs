@@ -17,7 +17,7 @@ public abstract class HealthSystem : MonoBehaviour, IObservable
         NotifyToSubscribers();
     }
 
-    public virtual void GetDamage(float dmg)
+    public virtual void Damage(float dmg)
     {
         if (_currentHP < 0f) return;
 
@@ -27,6 +27,12 @@ public abstract class HealthSystem : MonoBehaviour, IObservable
 
         if (_currentHP <= 0)
         { OnDead(); }
+    }
+
+    public virtual void Heal(float hp)
+    {
+        _currentHP += hp;
+        NotifyToSubscribers();
     }
 
     public virtual void OnDead()

@@ -10,6 +10,7 @@ public class Model : MonoBehaviour
 
     [SerializeField] PlayerCamera _playerCamera;
     [SerializeField] PlayerCombat _playerCombat;
+    [SerializeField] Curse _curse;
 
     [SerializeField] View _view;
     Controller _controller;
@@ -83,15 +84,17 @@ public class Model : MonoBehaviour
 
     public void Attack()
     {
-        if (!_staminaSystem.Available) return;
+        if (!_staminaSystem.Available || _playerCombat.Sheathed) return;
         _bladeHitBox.SetDamage(_dmgA);
         _playerCombat.Attack();
+        _curse.Cursed(_playerCombat.Sheathed);
     }
 
-    public void SetAttacksFalse()
+    public void Sheath()
     {
-        OnAttackA(false);
-        OnAttackB(false);
+        _playerCombat.Sheath();
+        if (!_playerCombat.Sheathed)
+            _curse.Cursed(!_playerCombat.Sheathed);
     }
 
     public void ShieldOn(bool onOff)

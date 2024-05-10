@@ -7,7 +7,7 @@ public class DamageTaker : MonoBehaviour, IDamageTaker
 
     public void GetDamage(float dmg)
     {
-        _healthSystem.GetDamage(dmg);
+        _healthSystem.Damage(dmg);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -29,8 +29,8 @@ public class Controller
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         { _model.Attack(); return; }
-        //if (Input.GetKeyDown(KeyCode.Mouse1))
-        //{ _model.AttackB(); return; }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        { _model.Sheath(); return; }
         //if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1))
         //{ _model.SetAttacksFalse(); }
         if ( Input.GetKeyDown(KeyCode.LeftControl))

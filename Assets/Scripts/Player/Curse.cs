@@ -18,7 +18,7 @@ public class Curse : MonoBehaviour, IObserver
 
     public void Notify(params object[] parameters)
     {
-        _healthSystem.Heal((float)parameters[0]);
+        _healthSystem.Heal((float)parameters[0]*2f);
     }
 
     IEnumerator CurseRoutine()
@@ -27,6 +27,9 @@ public class Curse : MonoBehaviour, IObserver
 
         while (_curseOn)
         {
+            if (!enabled)
+                yield return new WaitUntil(() => enabled);
+
             _healthSystem.Damage(_damage);
             yield return t;
         }

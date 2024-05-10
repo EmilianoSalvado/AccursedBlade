@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855a73be0e4f11e43a427d1b2d58c3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dmg: 10
+  _dmg: 15
+  _observerGameObjects: []
 --- !u!135 &4566104582997377841
 SphereCollider:
   m_ObjectHideFlags: 0

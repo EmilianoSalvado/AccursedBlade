@@ -8,8 +8,9 @@ public class Controller
     public Controller(Model m, View v)
     {
         m.AddToOnMovement(v.OnMovement);
-        m.AddToOnAttackA(v.OnAttackA);
-        m.AddToOnAttackB(v.OnAttackB);
+        m.AddToOnAttack(v.OnAttack);
+        m.AddToOnSheathOrUnsheath(v.OnSheathOrUnsheath);
+        m.AddToOnCurse(v.OnCurse);
         m.AddToOnBlock(v.OnBlock);
         _model = m;
     }

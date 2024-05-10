@@ -577,7 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855a73be0e4f11e43a427d1b2d58c3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dmg: 20
+  _dmg: 10
+  _observerGameObjects: []
 --- !u!54 &4517390281347698079
 Rigidbody:
   m_ObjectHideFlags: 0

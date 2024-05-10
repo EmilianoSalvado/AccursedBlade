@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
@@ -24,8 +25,9 @@ public class Model : MonoBehaviour
     [SerializeField] Collider _shieldCollider;
 
     event Action<float> OnMovement = delegate { };
-    event Action<bool> OnAttackA = delegate { };
-    event Action<bool> OnAttackB = delegate { };
+    event Action<bool> OnAttack = delegate { };
+    event Action<bool> OnSheathOrUnsheath = delegate { };
+    event Action<bool> OnCurse = delegate { };
     event Action<bool> OnBlock = delegate { };
 
     private void Start()
@@ -40,14 +42,19 @@ public class Model : MonoBehaviour
         OnMovement += method;
     }
 
-    public void AddToOnAttackA(Action<bool> method)
+    public void AddToOnAttack(Action<bool> method)
     {
-        OnAttackA += method;
+        OnAttack += method;
     }
 
-    public void AddToOnAttackB(Action<bool> method)
+    public void AddToOnSheathOrUnsheath(Action<bool> method)
     {
-        OnAttackB += method;
+        OnSheathOrUnsheath += method;
+    }
+
+    public void AddToOnCurse(Action<bool> method)
+    {
+        OnCurse += method;
     }
 
     public void AddToOnBlock(Action<bool> method)
@@ -87,14 +94,39 @@ public class Model : MonoBehaviour
         if (!_staminaSystem.Available || _playerCombat.Sheathed) return;
         _bladeHitBox.SetDamage(_dmgA);
         _playerCombat.Attack();
-        _curse.Cursed(_playerCombat.Sheathed);
+        _curse.Cursed(!_playerCombat.Sheathed);
+        OnAttack(!_playerCombat.Sheathed);
+        OnCurse(!_playerCombat.Sheathed);
+        StartCoroutine(CheckForAttackBoolChange());
     }
 
     public void Sheath()
     {
         _playerCombat.Sheath();
-        if (!_playerCombat.Sheathed)
-            _curse.Cursed(!_playerCombat.Sheathed);
+        _curse.Cursed(!_playerCombat.Sheathed);
+        OnCurse(!_playerCombat.Sheathed);
+        OnSheathOrUnsheath(!_playerCombat.Sheathed);
+        StartCoroutine(CheckForSheathBoolChange());
+    }
+
+    IEnumerator CheckForAttackBoolChange()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        if (!enabled)
+            yield return new WaitUntil(() => enabled);
+
+        OnAttack(false);
+    }
+
+    IEnumerator CheckForSheathBoolChange()
+    {
+        yield return new WaitUntil(() => _view.GetAnimator.GetBool("Sheathed") == true);
+
+        if (!enabled)
+            yield return new WaitUntil(() => enabled);
+
+        OnCurse(false);
     }
 
     public void ShieldOn(bool onOff)

@@ -3,26 +3,49 @@ using UnityEngine;
 public class View : MonoBehaviour
 {
     [SerializeField] Animator _animator;
+    public Animator GetAnimator {  get { return _animator; } } 
     [SerializeField] string _runningParameterTag;
 
-    [SerializeField] Animator _bladeAnimator;
-    [SerializeField] string _attackAParameter;
-    [SerializeField] string _attackBParameter;
-    [SerializeField] MeshRenderer _shieldRenderer;
+    [SerializeField] ParticleSystem _bladeAbsorvingParticle;
+    [SerializeField] ParticleSystem _bladeAttackParticle;
+    [SerializeField] ParticleSystem _bladeCurseParticle;
 
     public void OnMovement(float magnitude)
     {
         _animator.SetFloat(_runningParameterTag, magnitude);
     }
 
-    public void OnAttackA(bool b)
+    public void OnAttack(bool b)
     {
-        _bladeAnimator.SetBool(_attackAParameter, b);
+        if (b)
+        {
+            _bladeAttackParticle.Play();
+            return;
+        }
+
+        _bladeAttackParticle.Stop();
     }
 
-    public void OnAttackB(bool b)
+    public void OnSheathOrUnsheath(bool b)
     {
-        _bladeAnimator.SetBool(_attackBParameter, b);
+        if (b)
+        {
+            _bladeCurseParticle.Play();
+            return;
+        }
+
+        _bladeCurseParticle.Stop();
+    }
+
+    public void OnCurse(bool b)
+    {
+        if (b)
+        {
+            _bladeAbsorvingParticle.Play();
+            return;
+        }
+
+        _bladeAbsorvingParticle.Stop();
     }
 
     public void OnBlock(bool b)

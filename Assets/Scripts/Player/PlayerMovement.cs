@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody _rb;
+    [SerializeField] Transform _dirPoint;
     [SerializeField] float _movementSpeed;
     Vector3 _direction;
     public Vector3 Direction { get { return _direction; } }
@@ -17,8 +18,9 @@ public class PlayerMovement : MonoBehaviour
             _direction.Normalize();
 
         _rb.MovePosition(transform.position + _direction * (_movementSpeed * Time.deltaTime));
+        _dirPoint.position = transform.position + new Vector3(_direction.normalized.x,0f, _direction.normalized.z);
 
         if (_direction.sqrMagnitude > 0f)
-            transform.forward = Vector3.Lerp(transform.forward, new Vector3(_direction.x, transform.forward.y, _direction.z), _direction.sqrMagnitude);
+            transform.LookAt(_dirPoint.position);
     }
 }

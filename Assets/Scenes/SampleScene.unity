@@ -808,6 +808,8 @@ GameObject:
   - component: {fileID: 218856533}
   - component: {fileID: 218856535}
   - component: {fileID: 218856534}
+  - component: {fileID: 218856537}
+  - component: {fileID: 218856536}
   m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
@@ -827,8 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336e553691610ec44b75ef36a66bab93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 218856530}
-  _movementSpeed: 10
+  _playerMovement: {fileID: 0}
   _playerCamera: {fileID: 330585548}
   _view: {fileID: 218856529}
   _bladeHitBox: {fileID: 634244697}
@@ -978,6 +979,38 @@ MonoBehaviour:
   _recoveryDelay: 1.5
   _observerGameObjects:
   - {fileID: 1607237165}
+--- !u!114 &218856536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218856527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b79cd6f2b9c99949810cb16bcb2e917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 71868075}
+  _combo:
+  - {fileID: 11400000, guid: 548911d99ab10fa42b4bf08919bd365b, type: 2}
+  - {fileID: 11400000, guid: 85f8142070f9c06439456d4cd4cba0df, type: 2}
+  - {fileID: 11400000, guid: d5abfa50bf3b3164a8f36d5956349437, type: 2}
+  _minTimeBetweenCombos: 0.5
+--- !u!114 &218856537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218856527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d20f2817d00984e8fcedf3a8b3e22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 218856530}
+  _movementSpeed: 12
 --- !u!1 &268381810
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,9 +6,7 @@ using System;
 [RequireComponent(typeof(View))]
 public class Model : MonoBehaviour
 {
-    [SerializeField] Rigidbody _rb;
-    [SerializeField] float _movementSpeed;
-    Vector3 _direction;
+    [SerializeField] PlayerMovement _playerMovement;
 
     [SerializeField] PlayerCamera _playerCamera;
 
@@ -73,17 +71,7 @@ public class Model : MonoBehaviour
 
     public void Movement(float hAxis, float vAxis)
     {
-        _direction = _playerCamera.CameraRelativeRight * hAxis + _playerCamera.CameraRelativeForward * vAxis;
-
-        if (_direction.sqrMagnitude > 1)
-            _direction.Normalize();
-
-        _rb.MovePosition(transform.position + _direction * (_movementSpeed * Time.deltaTime));
-
-        if (_direction.sqrMagnitude > 0f)
-            transform.forward = Vector3.Lerp(transform.forward, new Vector3(_direction.x, transform.forward.y, _direction.z), _direction.sqrMagnitude);
-
-        OnMovement(_direction.sqrMagnitude);
+        OnMovement(_playerMovement.Direction.sqrMagnitude);
     }
 
     public void CameraAim(float mouseX, float mouseY)

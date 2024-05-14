@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] Transform _target;
-    [SerializeField] Transform _pivot;
+    [SerializeField] Transform _pivot, _cameraRelative;
     [SerializeField] float _offset, _blockedOffset, _defaultSensivity, _auxSensivity;
     float mouseX = 0, mouseY = 0;
     [SerializeField] LayerMask _everythingButPlayerLayer;
@@ -13,18 +13,20 @@ public class PlayerCamera : MonoBehaviour
     public Vector3 CameraRelativeForward
     {
         get
-        { return new Vector3(_pivot.forward.x, _pivot.position.y, _pivot.forward.z).normalized; }
+        { return _cameraRelative.forward; }
     }
 
     public Vector3 CameraRelativeRight
     {
         get
-        { return new Vector3(_pivot.right.x, _pivot.position.y, _pivot.right.z).normalized; }
+        { return _cameraRelative.right; }
     }
 
     public void UpdatePivot()
     {
-        _pivot.position = _target.transform.position + Vector3.up * 1f;
+        _pivot.position = _target.position + Vector3.up * 1f;
+        _cameraRelative.position = _pivot.position;
+        _cameraRelative.rotation = Quaternion.Euler(_target.rotation.eulerAngles.x, _pivot.rotation.eulerAngles.y, 0f); ;
     }
 
     public void CameraMovement(float x, float y)

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     [SerializeField] Transform[] _points;
+    [SerializeField] Transform _root;
     [SerializeField] Rigidbody _rb;
     [SerializeField] float _speed;
     Vector3 _auxVector;
@@ -29,7 +30,7 @@ public class Platform : MonoBehaviour
 
         if (other.TryGetComponent<Model>(out var model))
         {
-            model.transform.SetParent(null);
+            model.transform.SetParent(_root);
         }
     }
 

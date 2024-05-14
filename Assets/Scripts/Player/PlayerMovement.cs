@@ -11,14 +11,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void Movement(float hAxis, float vAxis, PlayerCamera playerCamera)
     {
+        if (hAxis <= 0f && vAxis <= 0f)
+        { return; }
+
         _direction = playerCamera.CameraRelativeRight * hAxis + playerCamera.CameraRelativeForward * vAxis;
         _direction.y = 0f;
+
+        Debug.Log($"_dir: {_direction}");
 
         if (_direction.sqrMagnitude > 1)
             _direction.Normalize();
 
         _rb.MovePosition(transform.position + _direction * (_movementSpeed * Time.deltaTime));
 
-        transform.forward =  _direction;
+        if (_direction.sqrMagnitude > 0f)
+            transform.forward = _direction;
     }
 }

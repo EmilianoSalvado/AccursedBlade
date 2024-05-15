@@ -9,6 +9,8 @@ public class Platform : MonoBehaviour
     [SerializeField] Transform _root;
     [SerializeField] Rigidbody _rb;
     [SerializeField] float _speed;
+    [SerializeField] Collider _triggerCollider;
+
     Vector3 _auxVector;
     bool _platformOn = false;
 
@@ -50,17 +52,24 @@ public class Platform : MonoBehaviour
     {
         yield return new WaitForSeconds(.6f);
 
-        foreach (var p in _points)
-        {
-            while (Vector3.Distance(transform.position, p.position) > .2f)
-            {
-                _auxVector = (p.position - transform.position).normalized;
-                yield return null;
-            }
+        _triggerCollider.enabled = false;
 
-            _auxVector = Vector3.zero;
-            _rb.MovePosition(p.position);
+        if (model.TryGetComponent<PlayerMovement>(out var pm))
+        {
+            foreach (var p in _points)
+            {
+                while (Vector3.Distance(transform.position, p.position) > .2f)
+                {
+                    yield return new WaitUntil(() => enabled);
+                    _auxVector = (p.position - transform.position).normalized;
+                    pm.Move(_rb.velocity);
+                    yield return null;
+                }
+                _auxVector = Vector3.zero;
+            }
         }
+
         _points = _points.Reverse().ToArray();
+        _triggerCollider.enabled = true;
     }
 }

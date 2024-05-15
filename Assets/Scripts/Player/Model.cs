@@ -38,29 +38,19 @@ public class Model : MonoBehaviour
     }
 
     public void AddToOnMovement(Action<float> method)
-    {
-        OnMovement += method;
-    }
+    { OnMovement += method; }
 
     public void AddToOnAttack(Action<bool> method)
-    {
-        OnAttack += method;
-    }
+    { OnAttack += method; }
 
     public void AddToOnSheathOrUnsheath(Action<bool> method)
-    {
-        OnSheathOrUnsheath += method;
-    }
+    { OnSheathOrUnsheath += method; }
 
     public void AddToOnCurse(Action<bool> method)
-    {
-        OnCurse += method;
-    }
+    { OnCurse += method; }
 
     public void AddToOnBlock(Action<bool> method)
-    {
-        OnBlock += method;
-    }
+    { OnBlock += method; }
 
     private void Update()
     {
@@ -69,14 +59,10 @@ public class Model : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        _controller.OnFixedUpdate();
-    }
+    { _controller.OnFixedUpdate(); }
 
     private void LateUpdate()
-    {
-        _controller.OnLateUpdate();
-    }
+    { _controller.OnLateUpdate(); }
 
     public void Movement(float hAxis, float vAxis)
     {
@@ -85,9 +71,7 @@ public class Model : MonoBehaviour
     }
 
     public void CameraAim(float mouseX, float mouseY)
-    {
-        _playerCamera.CameraMovement(mouseX, mouseY);
-    }
+    { _playerCamera.CameraMovement(mouseX, mouseY); }
 
     public void Attack()
     {

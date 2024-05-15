@@ -869,7 +869,7 @@ Rigidbody:
   m_GameObject: {fileID: 218856527}
   serializedVersion: 4
   m_Mass: 10
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -23510,7 +23510,7 @@ Transform:
   m_GameObject: {fileID: 1477689162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.25, y: -5, z: 0}
+  m_LocalPosition: {x: 9.5, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23863,7 +23863,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558804546}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3d4202f2713e7c4479e54db92a9526af, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -24153,8 +24153,8 @@ Transform:
   m_GameObject: {fileID: 1558804546}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.25, y: -5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 9.5, y: -5, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 123755092}
@@ -24177,6 +24177,7 @@ MonoBehaviour:
   _root: {fileID: 123755092}
   _rb: {fileID: 1558804547}
   _speed: 2
+  _triggerCollider: {fileID: 1558804548}
 --- !u!1 &1596960525
 GameObject:
   m_ObjectHideFlags: 0
@@ -26738,7 +26739,7 @@ Transform:
   m_GameObject: {fileID: 2101787737}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.25, y: 1, z: 0}
+  m_LocalPosition: {x: 5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

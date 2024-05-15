@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,14 +18,17 @@ public class PlayerMovement : MonoBehaviour
         _direction = playerCamera.CameraRelativeRight * hAxis + playerCamera.CameraRelativeForward * vAxis;
         _direction.y = 0f;
 
-        Debug.Log($"_dir: {_direction}");
-
         if (_direction.sqrMagnitude > 1)
             _direction.Normalize();
 
-        _rb.MovePosition(transform.position + _direction * (_movementSpeed * Time.deltaTime));
+        Move(_direction * (_movementSpeed * Time.fixedDeltaTime));
 
         if (_direction.sqrMagnitude > 0f)
             transform.forward = _direction;
+    }
+
+    public void Move(Vector3 dir)
+    {
+        _rb.MovePosition(transform.position + dir);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Platform : MonoBehaviour
     [SerializeField] Rigidbody _rb;
     [SerializeField] float _speed;
     [SerializeField] Collider _triggerCollider;
+    PlayerModel _pm;
 
     Vector3 _auxVector;
     bool _platformOn = false;
@@ -18,11 +20,13 @@ public class Platform : MonoBehaviour
     {
         if (!_platformOn) return;
 
-        if (other.TryGetComponent<Model>(out var model))
+        if (other.TryGetComponent<PlayerModel>(out var pm))
         {
-            model.transform.SetParent(transform);
+            pm.transform.SetParent(transform);
+            pm.GetPlayerMovement.IsAttachedToParent(true);
             StopAllCoroutines();
-            StartCoroutine(Move(model));
+            StartCoroutine(Move());
+            _pm = pm;
         }
     }
 
@@ -30,17 +34,17 @@ public class Platform : MonoBehaviour
     {
         if (!_platformOn) return;
 
-        if (other.TryGetComponent<Model>(out var model))
+        if (other.TryGetComponent<PlayerModel>(out var model))
         {
             model.transform.SetParent(_root);
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_auxVector.sqrMagnitude <= 0f) return;
 
-        _rb.MovePosition(transform.position + _auxVector * (_speed * Time.fixedDeltaTime));
+        transform.position += _auxVector * (_speed * Time.deltaTime);
     }
 
     public void PlatformOn(bool onOff)
@@ -48,28 +52,25 @@ public class Platform : MonoBehaviour
         _platformOn = onOff;
     }
 
-    IEnumerator Move(Model model)
+    IEnumerator Move()
     {
         yield return new WaitForSeconds(.6f);
 
-        _triggerCollider.enabled = false;
+        var path = _points.SkipWhile((x) => (x.transform.position - transform.position).sqrMagnitude < 1f).ToArray();
 
-        if (model.TryGetComponent<PlayerMovement>(out var pm))
+        foreach (var point in path)
         {
-            foreach (var p in _points)
+            while (Vector3.Distance(transform.position, point.position) > .2f)
             {
-                while (Vector3.Distance(transform.position, p.position) > .2f)
-                {
-                    yield return new WaitUntil(() => enabled);
-                    _auxVector = (p.position - transform.position).normalized;
-                    pm.Move(_rb.velocity);
-                    yield return null;
-                }
-                _auxVector = Vector3.zero;
+                yield return new WaitUntil(() => enabled);
+                _auxVector = (point.position - transform.position).normalized;
+                yield return null;
             }
         }
 
+        _pm.GetPlayerMovement.IsAttachedToParent(false);
+        _pm.transform.SetParent(_root);
         _points = _points.Reverse().ToArray();
-        _triggerCollider.enabled = true;
+        _auxVector = Vector3.zero;
     }
 }

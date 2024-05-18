@@ -15,13 +15,16 @@ public class ParticlesOnHit : MonoBehaviour
             if (!other.GetComponent<DamageDoer>())
                 return;
 
-            Physics.Raycast(transform.position + (other.transform.position - transform.position) * 2f,
+            if (Physics.Raycast(transform.position + (other.transform.position - transform.position) * 2f,
                 transform.position - other.transform.position,
-                out var hitInfo);
+                out var hitInfo))
+            {
 
-            _particleSystem.transform.position = hitInfo.point;
-            _particleSystem.transform.forward = hitInfo.normal;
-            _particleSystem.Play();
+                _particleSystem.transform.position = hitInfo.point;
+                _particleSystem.transform.forward = -hitInfo.normal;
+                _particleSystem.Play();
+            }
+
         };
     }
 

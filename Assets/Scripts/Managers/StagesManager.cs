@@ -23,11 +23,13 @@ public class StagesManager : MonoBehaviour
 
     IEnumerator StageRoutine()
     {
-        if (_stageCount > 0)
-        { _platforms[_stageCount - 1].PlatformOn(false); }
-
         for (int j = 0; j < _spawners[_stageCount].Waves.Length; j++)
         {
+            foreach (var pf in _platforms)
+            {
+                pf.PlatformOn(false);
+            }
+
             yield return new WaitForSeconds(_waveDelay);
 
             _spawners[_stageCount].AuxTrigger();
@@ -42,6 +44,14 @@ public class StagesManager : MonoBehaviour
         }
 
         _stageCount++;
+
+        int c = 0;
+        foreach (var pf in _platforms)
+        {
+            if (c <= _stageCount)
+            { pf.PlatformOn(true); }
+            c++;
+        }
     }
 
     public void SpawnerTriggered()

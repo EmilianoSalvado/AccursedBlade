@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Controller
+public class PlayerController
 {
     float _horizontalAxis, _verticalAxis, _mouseHorizontal, _mouseVertical;
-    Model _model;
+    PlayerModel _model;
 
-    public Controller(Model m, View v)
+    public PlayerController(PlayerModel m, View v)
     {
         m.AddToOnMovement(v.OnMovement);
         m.AddToOnAttack(v.OnAttack);

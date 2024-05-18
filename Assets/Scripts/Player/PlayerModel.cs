@@ -5,16 +5,18 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(View))]
-public class Model : MonoBehaviour
+public class PlayerModel : MonoBehaviour
 {
-    [SerializeField] PlayerMovement _playerMovement;
-
+    [SerializeField] Rigidbody _rb;
+    [SerializeField] float _movementSpeed;
     [SerializeField] PlayerCamera _playerCamera;
     [SerializeField] PlayerCombat _playerCombat;
     [SerializeField] Curse _curse;
 
     [SerializeField] View _view;
-    Controller _controller;
+    PlayerController _controller;
+    PlayerMovement _playerMovement;
+    public PlayerMovement GetPlayerMovement { get { return _playerMovement; } }
 
     [SerializeField] DamageDoer _bladeHitBox;
     [SerializeField] float _dmgA, _dmgB, _dmgC;
@@ -32,7 +34,8 @@ public class Model : MonoBehaviour
 
     private void Start()
     {
-        _controller = new Controller(this, _view);
+        _controller = new PlayerController(this, _view);
+        _playerMovement = new PlayerMovement(_rb, _movementSpeed, transform, _playerCamera);
         _bladeHitBox.SetDamage(_dmgA);
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -66,7 +69,7 @@ public class Model : MonoBehaviour
 
     public void Movement(float hAxis, float vAxis)
     {
-        _playerMovement.Movement(hAxis, vAxis, _playerCamera);
+        _playerMovement.Movement(hAxis, vAxis);
         OnMovement(_playerMovement.Direction.sqrMagnitude);
     }
 

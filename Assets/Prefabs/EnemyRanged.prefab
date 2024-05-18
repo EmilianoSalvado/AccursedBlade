@@ -5223,7 +5223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae6abe97c40aad4e97c360a91b1c914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 6
+  _maxHP: 2
   _currentHP: 0
   _observerGameObjects: []
   _enemy: {fileID: 3092240952503452796}

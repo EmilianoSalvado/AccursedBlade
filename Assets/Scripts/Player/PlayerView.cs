@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class View : MonoBehaviour
+public class PlayerView : MonoBehaviour
 {
     [SerializeField] Animator _animator;
     public Animator GetAnimator {  get { return _animator; } } 

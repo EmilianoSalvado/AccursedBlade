@@ -51,9 +51,9 @@ public class PlayerMovement
         _move = (x) => _rb.MovePosition(_transform.position + x);
     }
 
-    public void Impulse(Vector3 dir, float force)
+    public void Impulse()
     {
-        _rb.velocity = dir * force;
+        _rb.velocity = _direction.sqrMagnitude > 0f ? _direction.normalized * 12f : _transform.forward * 12f;
         _transform.TryGetComponent<MonoBehaviour>(out var mb);
         mb.StopCoroutine("BlockMovementForSeconds");
         mb.StartCoroutine(BlockMovementForSeconds(mb,.5f));
@@ -62,10 +62,13 @@ public class PlayerMovement
     IEnumerator BlockMovementForSeconds(MonoBehaviour behaviour, float seconds)
     {
         yield return new WaitUntil(()=>behaviour.enabled);
+
         _move = (x) => { };
         yield return new WaitForSeconds(seconds);
+
         yield return new WaitUntil(() => behaviour.enabled);
-        _rb.velocity = Vector3.zero;
+
+        _rb.velocity = _direction * (_movementSpeed * Time.fixedDeltaTime);
         _move = (x) => _rb.MovePosition(_transform.position + x);
     }
 }

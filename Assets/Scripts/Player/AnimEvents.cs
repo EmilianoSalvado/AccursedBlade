@@ -2,20 +2,10 @@ using UnityEngine;
 
 public class AnimEvents : MonoBehaviour
 {
-    [SerializeField] ParticleSystem _particleSystem;
-    [SerializeField] StaminaSystem _staminaSystem;
-    public void PlayParticleSystem()
-    {
-        _particleSystem.Play();
-    }
+    [SerializeField] PlayerModel _model;
 
-    public void StopParticleSystem()
+    public void Impulse()
     {
-        _particleSystem.Stop();
-    }
-
-    public void TakeStamina(float amount)
-    {
-        _staminaSystem.SpendStamina(amount);
+        _model.GetPlayerMovement.Impulse();
     }
 }

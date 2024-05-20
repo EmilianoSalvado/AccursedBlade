@@ -4,7 +4,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(View))]
+[RequireComponent(typeof(PlayerView))]
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField] Rigidbody _rb;
@@ -13,7 +13,7 @@ public class PlayerModel : MonoBehaviour
     [SerializeField] PlayerCombat _playerCombat;
     [SerializeField] Curse _curse;
 
-    [SerializeField] View _view;
+    [SerializeField] PlayerView _view;
     PlayerController _controller;
     PlayerMovement _playerMovement;
     public PlayerMovement GetPlayerMovement { get { return _playerMovement; } }
@@ -80,8 +80,7 @@ public class PlayerModel : MonoBehaviour
     {
         if (!_staminaSystem.Available || _playerCombat.Sheathed) return;
         _bladeHitBox.SetDamage(_dmgA);
-        _playerCombat.Attack();
-        _playerMovement.Impulse(transform.forward, 15f);
+        _playerCombat.Attack(_playerMovement);
         _curse.Cursed(!_playerCombat.Sheathed);
         OnAttack(!_playerCombat.Sheathed);
         OnCurse(!_playerCombat.Sheathed);

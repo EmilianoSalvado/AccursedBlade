@@ -5,28 +5,22 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator _animator;
-    [SerializeField] float _minTimeBetweenCombos, _minTimeBetweenTriggered;
-    float _lastTimeTriggered, _lastComboEnd;
-    bool _sheathed = true;
+    [SerializeField] float _minNormalizedTime;
+    bool _sheathed = true, _available = true;
+    float _animNormalizedTime { get { return _animator.GetCurrentAnimatorStateInfo(2).normalizedTime; } }
     public bool Sheathed { get { return _sheathed; } }
 
-    public void Attack()
+    public void Attack(PlayerMovement pm)
     {
-        if (Time.time - _lastComboEnd < _minTimeBetweenCombos)
-        { return; }
-
-        StopAllCoroutines();
-
-        if (Time.time - _lastTimeTriggered > _minTimeBetweenTriggered)
+        if (_animNormalizedTime < _minNormalizedTime || !_available)
         {
-            StartCoroutine(WaitUntilAnimationHasPassed(.8f));
-            _lastTimeTriggered = Time.time;
-            _animator.SetBool("Attack", true);
+            _animator.SetBool("Attack", false);
             return;
         }
 
-        _lastTimeTriggered = Time.time;
-        _animator.SetBool("Attack", false);
+        StopAllCoroutines();
+        StartCoroutine(WaitUntilAnimationHasPassed(pm));
+        _animator.SetBool("Attack", true);
     }
 
     public void Sheath()
@@ -35,9 +29,14 @@ public class PlayerCombat : MonoBehaviour
         _animator.SetBool("Sheathed", _sheathed);
     }
 
-    IEnumerator WaitUntilAnimationHasPassed(float minNormilizedTime)
+    IEnumerator WaitUntilAnimationHasPassed(PlayerMovement pm)
     {
-        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(2).normalizedTime > minNormilizedTime);
+        _available = false;
+        yield return new WaitUntil(() => _animNormalizedTime > _minNormalizedTime);
+        yield return new WaitUntil(() => enabled);
+        _available = true;
+        yield return new WaitUntil(() => _animNormalizedTime > .9f);
+        yield return new WaitUntil(() => enabled);
         _animator.SetBool("Attack", false);
     }
 }

@@ -5,7 +5,7 @@ public class PlayerController
     float _horizontalAxis, _verticalAxis, _mouseHorizontal, _mouseVertical;
     PlayerModel _model;
 
-    public PlayerController(PlayerModel m, View v)
+    public PlayerController(PlayerModel m, PlayerView v)
     {
         m.AddToOnMovement(v.OnMovement);
         m.AddToOnAttack(v.OnAttack);

@@ -997,7 +997,7 @@ MonoBehaviour:
   _staminaSystem: {fileID: 218856535}
   _shield: {fileID: 1866068139}
   _energySystem: {fileID: 218856534}
-  _shieldCollider: {fileID: 0}
+  _shieldCollider: {fileID: 1866068136}
 --- !u!1 &248034195
 GameObject:
   m_ObjectHideFlags: 0

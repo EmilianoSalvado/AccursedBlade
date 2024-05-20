@@ -46,17 +46,6 @@ public class DamageDoer : MonoBehaviour, IObservable
         {
             damageTaker.GetDamage(_dmg);
             NotifyToSubscribers();
-            StopAllCoroutines();
-            StartCoroutine(ResetHitBox());
         }
-    }
-
-    IEnumerator ResetHitBox()
-    {
-        var c = GetComponent<Collider>();
-        c.enabled = false;
-        yield return new WaitForSeconds(1f);
-        if (!enabled) yield return new WaitUntil(() => enabled);
-        c.enabled = true;
     }
 }

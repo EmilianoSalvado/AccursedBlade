@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,6 +11,7 @@ public class PlayerCamera : MonoBehaviour
     float mouseX = 0, mouseY = 0;
     [SerializeField] LayerMask _everythingButPlayerLayer;
     RaycastHit _hit;
+    Action _move;
 
     public Vector3 CameraRelativeForward
     {
@@ -20,6 +23,15 @@ public class PlayerCamera : MonoBehaviour
     {
         get
         { return _cameraRelative.right; }
+    }
+
+    private void Awake()
+    {
+        _move = () =>
+        {
+            transform.position = _pivot.position - _pivot.forward * CameraDistance();
+            transform.LookAt(_pivot.position);
+        };
     }
 
     public void UpdatePivot()
@@ -41,8 +53,7 @@ public class PlayerCamera : MonoBehaviour
             _pivot.rotation = Quaternion.Euler(mouseY, mouseX, 0f);
         }
 
-        transform.position = _pivot.position - _pivot.forward * CameraDistance();
-        transform.LookAt(_pivot.position);
+        _move();
     }
 
     float CameraDistance()
@@ -55,5 +66,24 @@ public class PlayerCamera : MonoBehaviour
         _auxSensivity = _defaultSensivity;
 
         return _offset;
+    }
+
+    public void CameraShakingPosition(bool isShaking, Vector3 pos, Vector3 initPos)
+    {
+        if (!isShaking)
+        {
+            _move = () =>
+            {
+                transform.position = _pivot.position - _pivot.forward * CameraDistance();
+                transform.LookAt(_pivot.position);
+            };
+            return;
+        }
+
+        _move = () =>
+        {
+            transform.position = pos;
+            transform.LookAt(pos + (_pivot.position - initPos));
+        };
     }
 }

@@ -53,9 +53,10 @@ public class PlayerMovement
 
     public void Impulse()
     {
-        _rb.velocity = _direction.sqrMagnitude > 0f ? _direction.normalized * 12f : _transform.forward * 12f;
-        _transform.TryGetComponent<MonoBehaviour>(out var mb);
-        mb.StopCoroutine("BlockMovementForSeconds");
+        _rb.velocity = _direction.sqrMagnitude > 0f ? _direction.normalized * 15f : _transform.forward * 15f;
+        _transform.TryGetComponent<PlayerModel>(out var pm);
+        var mb = (MonoBehaviour)pm;
+        mb.StopAllCoroutines();
         mb.StartCoroutine(BlockMovementForSeconds(mb,.5f));
     }
 

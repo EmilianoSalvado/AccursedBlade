@@ -80,7 +80,7 @@ public class PlayerModel : MonoBehaviour
     {
         if (!_staminaSystem.Available || _playerCombat.Sheathed) return;
         _bladeHitBox.SetDamage(_dmgA);
-        _playerCombat.Attack(_playerMovement);
+        _playerCombat.Attack();
         _curse.Cursed(!_playerCombat.Sheathed);
         OnAttack(!_playerCombat.Sheathed);
         OnCurse(!_playerCombat.Sheathed);

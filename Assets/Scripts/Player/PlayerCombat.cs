@@ -6,21 +6,22 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] Animator _animator;
     [SerializeField] float _minNormalizedTime;
-    bool _sheathed = true, _available = true;
+    bool _sheathed = true;
     float _animNormalizedTime { get { return _animator.GetCurrentAnimatorStateInfo(2).normalizedTime; } }
     public bool Sheathed { get { return _sheathed; } }
-
-    public void Attack(PlayerMovement pm)
+    int _currentStateHash;
+    public void Attack()
     {
-        if (_animNormalizedTime < _minNormalizedTime || !_available)
+        if (_animNormalizedTime < _minNormalizedTime)
         {
+            StopAllCoroutines();
             _animator.SetBool("Attack", false);
             return;
         }
 
-        StopAllCoroutines();
-        StartCoroutine(WaitUntilAnimationHasPassed(pm));
         _animator.SetBool("Attack", true);
+        StopAllCoroutines();
+        StartCoroutine(WaitUntilAnimationHasPassed());
     }
 
     public void Sheath()
@@ -29,14 +30,11 @@ public class PlayerCombat : MonoBehaviour
         _animator.SetBool("Sheathed", _sheathed);
     }
 
-    IEnumerator WaitUntilAnimationHasPassed(PlayerMovement pm)
+    IEnumerator WaitUntilAnimationHasPassed()
     {
-        _available = false;
-        yield return new WaitUntil(() => _animNormalizedTime > _minNormalizedTime);
-        yield return new WaitUntil(() => enabled);
-        _available = true;
-        yield return new WaitUntil(() => _animNormalizedTime > .9f);
-        yield return new WaitUntil(() => enabled);
+        yield return new WaitUntil(() => _currentStateHash != _animator.GetCurrentAnimatorStateInfo(2).shortNameHash);
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(2).normalizedTime > _minNormalizedTime);
         _animator.SetBool("Attack", false);
+        _currentStateHash = _animator.GetCurrentAnimatorStateInfo(2).shortNameHash;
     }
 }

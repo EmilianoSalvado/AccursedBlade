@@ -53,11 +53,11 @@ public class PlayerMovement
 
     public void Impulse()
     {
-        _rb.velocity = _direction.sqrMagnitude > 0f ? _direction.normalized * 15f : _transform.forward * 15f;
+        _rb.velocity = _direction.sqrMagnitude > 0f ? _direction.normalized * 20f : _transform.forward * 20f;
         _transform.TryGetComponent<PlayerModel>(out var pm);
         var mb = (MonoBehaviour)pm;
         mb.StopAllCoroutines();
-        mb.StartCoroutine(BlockMovementForSeconds(mb,.5f));
+        mb.StartCoroutine(BlockMovementForSeconds(mb,.2f));
     }
 
     IEnumerator BlockMovementForSeconds(MonoBehaviour behaviour, float seconds)

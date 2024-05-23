@@ -19,7 +19,7 @@ public class PlayerModel : MonoBehaviour
     public PlayerMovement GetPlayerMovement { get { return _playerMovement; } }
 
     [SerializeField] DamageDoer _bladeHitBox;
-    [SerializeField] float _dmgA, _dmgB, _dmgC;
+    [SerializeField] float _dmgA, _attackStaminaCost, _dashStaminaCost;
     [SerializeField] StaminaSystem _staminaSystem;
     [SerializeField] Shield _shield;
     [SerializeField] EnergySystem _energySystem;
@@ -31,6 +31,7 @@ public class PlayerModel : MonoBehaviour
     event Action<bool> OnSheathOrUnsheath = delegate { };
     event Action<bool> OnCurse = delegate { };
     event Action<bool> OnBlock = delegate { };
+    event Action<bool> OnDash = delegate { };
 
     private void Start()
     {
@@ -45,6 +46,9 @@ public class PlayerModel : MonoBehaviour
 
     public void AddToOnAttack(Action<bool> method)
     { OnAttack += method; }
+
+    public void AddToOnDash(Action<bool> method)
+    { OnDash += method; }
 
     public void AddToOnSheathOrUnsheath(Action<bool> method)
     { OnSheathOrUnsheath += method; }
@@ -81,10 +85,19 @@ public class PlayerModel : MonoBehaviour
         if (!_staminaSystem.Available || _playerCombat.Sheathed) return;
         _bladeHitBox.SetDamage(_dmgA);
         _playerCombat.Attack();
+        _staminaSystem.SpendStamina(_attackStaminaCost);
         _curse.Cursed(!_playerCombat.Sheathed);
         OnAttack(!_playerCombat.Sheathed);
         OnCurse(!_playerCombat.Sheathed);
         StartCoroutine(CheckForAttackBoolChange());
+    }
+
+    public void Dash(bool b)
+    {
+        _playerMovement.Impulse();
+        OnDash(b);
+        _staminaSystem.SpendStamina(_dashStaminaCost);
+        StartCoroutine(CancelDash());
     }
 
     public void Sheath()
@@ -114,6 +127,12 @@ public class PlayerModel : MonoBehaviour
             yield return new WaitUntil(() => enabled);
 
         OnCurse(false);
+    }
+
+    IEnumerator CancelDash()
+    {
+        yield return new WaitForSeconds(.5f);
+        OnDash(false);
     }
 
     public void ShieldOn(bool onOff)

@@ -9,6 +9,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] ParticleSystem _bladeAbsorvingParticle;
     [SerializeField] ParticleSystem _bladeAttackParticle;
     [SerializeField] ParticleSystem _bladeCurseParticle;
+    [SerializeField] ParticleSystem _dashParticle;
 
     public void OnMovement(float magnitude)
     {
@@ -24,6 +25,14 @@ public class PlayerView : MonoBehaviour
         }
 
         _bladeAttackParticle.Stop();
+    }
+
+    public void OnDash(bool isDashing)
+    {
+        if (isDashing) _dashParticle.Play();
+        else _dashParticle.Stop();
+
+        _animator.SetBool("Dash", isDashing);
     }
 
     public void OnSheathOrUnsheath(bool b)

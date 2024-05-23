@@ -9,6 +9,7 @@ public class PlayerController
     {
         m.AddToOnMovement(v.OnMovement);
         m.AddToOnAttack(v.OnAttack);
+        m.AddToOnDash(v.OnDash);
         m.AddToOnSheathOrUnsheath(v.OnSheathOrUnsheath);
         m.AddToOnCurse(v.OnCurse);
         m.AddToOnBlock(v.OnBlock);
@@ -27,10 +28,12 @@ public class PlayerController
         { _model.Attack(); return; }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         { _model.Sheath(); return; }
-        if ( Input.GetKeyDown(KeyCode.LeftControl))
-        { _model.ShieldOn(true); }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        { _model.Dash(true); return; }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        { _model.ShieldOn(true); return; }
         if (Input.GetKeyUp(KeyCode.LeftControl))
-        { _model.ShieldOn(false); }
+        { _model.ShieldOn(false); return; }
     }
 
     public void OnFixedUpdate()
